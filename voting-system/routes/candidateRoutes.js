@@ -3,6 +3,7 @@ const router = express.Router();
 const candidateController = require("../controllers/candidateController");
 
 router.get("/", candidateController.getAllCandidates);
+router.get("/election/:type", candidateController.getCandidatesByElectionType);
 router.get("/:id", candidateController.getCandidateById);
 router.post("/", candidateController.createCandidate);
 router.put("/:id", candidateController.updateCandidate);

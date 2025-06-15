@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Modal,
+  Paper,
   Tab,
   Tabs,
   TextField,
@@ -21,17 +22,19 @@ function LandingPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  function resetLogin() {
+  const navigate = useNavigate();
+
+  const resetLogin = () => {
     setEmail("");
     setPassword("");
     setName("");
-  }
-  const navigate = useNavigate();
+  };
 
   const handleOpen = (mode) => {
     setAuthMode(mode);
     setOpen(true);
   };
+
   const handleClose = () => setOpen(false);
 
   const handleSubmit = async () => {
@@ -44,7 +47,7 @@ function LandingPage() {
       } else {
         const res = await signup({ name, email, password, userType });
         if (res.status === 201) {
-          alert("user Created"); //It Blocks Javascript Code Execution as well
+          alert("User created successfully");
           setOpen(false);
         }
       }
@@ -54,13 +57,14 @@ function LandingPage() {
     }
   };
 
-  const style = {
+  const modalStyle = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "background.paper",
+    borderRadius: 2,
     boxShadow: 24,
     p: 4,
   };
@@ -71,14 +75,59 @@ function LandingPage() {
         onLoginClick={() => handleOpen("login")}
         onSignupClick={() => handleOpen("signup")}
       />
-      <main style={{ padding: "2rem", textAlign: "center" }}>
-        <h1>Welcome to Election Management System</h1>
-        <p>Secure and Transparent Digital Voting</p>
-      </main>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          backgroundImage: 'url("/LandingPage Background.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          px: 2,
+          py: 6,
+        }}>
+        {/* <Paper
+          elevation={3}
+          sx={{
+            p: 6,
+            borderRadius: 3,
+            maxWidth: 600,
+            width: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
+            backdropFilter: "blur(2px)",
+            textAlign: "center",
+          }}>
+          <Typography variant="h3" gutterBottom>
+            Election Management System
+          </Typography>
+          <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+            A secure and transparent digital voting platform built to modernize
+            the electoral process. Empowering voters and enabling real-time
+            election management for committees.
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={() => handleOpen("login")}>
+              Login
+            </Button>
+            <Button
+              variant="outlined"
+              size="large"
+              onClick={() => handleOpen("signup")}>
+              Signup
+            </Button>
+          </Box>
+        </Paper> */}
+      </Box>
+
       <Footer />
 
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Typography variant="h6" gutterBottom>
             {authMode === "login" ? "Login" : "Signup"} as{" "}
             {userType === "voter" ? "Voter" : "Committee Member"}
@@ -86,7 +135,9 @@ function LandingPage() {
           <Tabs
             value={userType}
             onChange={(e, val) => setUserType(val)}
-            aria-label="user type selector">
+            aria-label="user type selector"
+            sx={{ mb: 2 }}
+            centered>
             <Tab label="Voter" value="voter" />
             <Tab label="Committee" value="committee" />
           </Tabs>
@@ -116,12 +167,12 @@ function LandingPage() {
           )}
           <Button
             variant="contained"
+            fullWidth
+            sx={{ mt: 2 }}
             onClick={async () => {
               await handleSubmit();
               resetLogin();
-            }}
-            fullWidth
-            sx={{ mt: 2 }}>
+            }}>
             {authMode === "login" ? "Login" : "Signup"}
           </Button>
         </Box>

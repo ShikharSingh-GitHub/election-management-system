@@ -12,12 +12,15 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.1",
     "@mui/material": "^7.1.1",
-    "axios": "^1.9.0", //helps make http requests, gives some retry logic as well and helps deal with objects as well. Browser also has its own Fetch built into them if we dont use Axios. This helps connect us to Node Server.
-    "bcryptjs": "^3.0.2", //It is slower, but it is intentionally slower so that Attacker also slows down
-    "react": "^19.1.0", 
-    "react-dom": "^19.1.0", 
-    "react-router-dom": "^7.6.2" //helps with the back button to allow to deep link with different URL for Each event and clicks etc. this helps navigate the pages. 
+    "@mui/x-data-grid": "^8.5.2",
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "dayjs": "^1.11.13",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

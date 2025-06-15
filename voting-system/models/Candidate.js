@@ -8,4 +8,7 @@ module.exports = {
   update: (id, data) =>
     db.query("UPDATE Candidate SET ? WHERE CandidateID = ?", [data, id]),
   remove: (id) => db.query("DELETE FROM Candidate WHERE CandidateID = ?", [id]),
+  getByElectionType: (type) => {
+    return db.query("SELECT * FROM Candidate WHERE ElectionType = ?", [type]);
+  },
 };

@@ -50,3 +50,12 @@ exports.deleteCandidate = async (req, res) => {
     res.status(500).json({ message: "Error deleting candidate", error: err });
   }
 };
+
+exports.getCandidatesByElectionType = async (req, res) => {
+  try {
+    const [rows] = await Candidate.getByElectionType(req.params.type);
+    res.json(rows);
+  } catch (err) {
+    handleError(res, "Error fetching candidates by election type", err);
+  }
+};
