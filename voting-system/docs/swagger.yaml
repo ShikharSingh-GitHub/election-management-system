@@ -1,0 +1,346 @@
+openapi: 3.0.0
+info:
+  title: Election Management API
+  description: API for managing Voters, Candidates, Elections, and Votes
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api
+
+paths:
+  /voters:
+    get:
+      summary: Get all voters
+      description: Retrieve a list of all voters
+      responses:
+        "200":
+          description: List of voters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Voter"
+    post:
+      summary: Create a new voter
+      description: Add a new voter to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Voter"
+      responses:
+        "201":
+          description: Voter created
+        "400":
+          description: Invalid input
+
+  /voters/{id}:
+    get:
+      summary: Get voter by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Voter found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Voter"
+        "404":
+          description: Voter not found
+    put:
+      summary: Update a voter
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Voter"
+      responses:
+        "200": { description: Voter updated }
+        "400": { description: Invalid input }
+        "404": { description: Voter not found }
+    delete:
+      summary: Delete a voter
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: Voter deleted }
+        "404": { description: Voter not found }
+
+  /candidates:
+    get:
+      summary: Get all candidates
+      responses:
+        "200":
+          description: List of candidates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Candidate"
+    post:
+      summary: Create a candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Candidate"
+      responses:
+        "201": { description: Candidate created }
+        "400": { description: Invalid input }
+
+  /candidates/{id}:
+    get:
+      summary: Get candidate by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Candidate found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Candidate"
+        "404": { description: Candidate not found }
+    put:
+      summary: Update a candidate
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Candidate"
+      responses:
+        "200": { description: Candidate updated }
+        "400": { description: Invalid input }
+        "404": { description: Candidate not found }
+    delete:
+      summary: Delete a candidate
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: Candidate deleted }
+        "404": { description: Candidate not found }
+
+  /elections:
+    get:
+      summary: Get all elections
+      responses:
+        "200":
+          description: List of elections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Election"
+    post:
+      summary: Create an election
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Election"
+      responses:
+        "201": { description: Election created }
+        "400": { description: Invalid input }
+
+  /elections/{id}:
+    get:
+      summary: Get election by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Election found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Election"
+        "404": { description: Election not found }
+    put:
+      summary: Update an election
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Election"
+      responses:
+        "200": { description: Election updated }
+        "400": { description: Invalid input }
+        "404": { description: Election not found }
+    delete:
+      summary: Delete an election
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: Election deleted }
+        "404": { description: Election not found }
+
+  /votes:
+    get:
+      summary: Get all votes
+      responses:
+        "200":
+          description: List of votes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vote"
+    post:
+      summary: Cast a vote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Vote"
+      responses:
+        "201": { description: Vote cast }
+        "400": { description: Invalid input }
+
+  /votes/{id}:
+    get:
+      summary: Get vote by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Vote found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vote"
+        "404": { description: Vote not found }
+    put:
+      summary: Update a vote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Vote"
+      responses:
+        "200": { description: Vote updated }
+        "400": { description: Invalid input }
+        "404": { description: Vote not found }
+    delete:
+      summary: Delete a vote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200": { description: Vote deleted }
+        "404": { description: Vote not found }
+
+components:
+  schemas:
+    Voter:
+      type: object
+      properties:
+        VoterID:
+          type: integer
+        Name:
+          type: string
+        Gender:
+          type: string
+        AadharID:
+          type: string
+        DOB:
+          type: string
+          format: date
+        Email:
+          type: string
+        ContactNumber:
+          type: string
+
+    Candidate:
+      type: object
+      properties:
+        CandidateID:
+          type: integer
+        Name:
+          type: string
+        Gender:
+          type: string
+        AadharID:
+          type: string
+        DOB:
+          type: string
+          format: date
+        Email:
+          type: string
+        ContactNumber:
+          type: string
+
+    Election:
+      type: object
+      properties:
+        ElectionID:
+          type: integer
+        Type:
+          type: string
+
+    Vote:
+      type: object
+      properties:
+        VID:
+          type: integer
+        VoterID:
+          type: integer
+        CandidateID:
+          type: integer
+        ElectionID:
+          type: integer

@@ -1,0 +1,33 @@
+{
+  "name": "election-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.1",
+    "axios": "^1.9.0", //helps make http requests, gives some retry logic as well and helps deal with objects as well. Browser also has its own Fetch built into them if we dont use Axios. This helps connect us to Node Server.
+    "bcryptjs": "^3.0.2", //It is slower, but it is intentionally slower so that Attacker also slows down
+    "react": "^19.1.0", 
+    "react-dom": "^19.1.0", 
+    "react-router-dom": "^7.6.2" //helps with the back button to allow to deep link with different URL for Each event and clicks etc. this helps navigate the pages. 
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "vite": "^6.3.5"
+  }
+}
