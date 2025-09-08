@@ -54,3 +54,17 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: "Login failed", error: err.message });
   }
 };
+
+exports.updateEmail = async (req, res) => {
+  const { userId } = req.params;
+  const { email } = req.body;
+  try {
+    await pool.query("UPDATE users SET email = ? WHERE id = ?", [
+      email,
+      userId,
+    ]);
+    res.json({ message: "Email updated successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Update failed", error: err.message });
+  }
+};
